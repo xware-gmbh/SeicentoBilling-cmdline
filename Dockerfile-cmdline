@@ -1,0 +1,40 @@
+#
+# Copyright (c) 2020. XWare GmbH - Muri Josef
+# ***************************************************
+
+# set certified JRE image version for the
+# seicentobilling command line tools
+
+# image for java
+ARG JAVA_BASE_IMAGE=openjdk:11.0-slim
+
+FROM ${JAVA_BASE_IMAGE}
+
+ARG SEICENTO_VERSION
+
+ENV SEICENTO_VERSION ${SEICENTO_VERSION:-20.0.1}
+
+# This Dockerfile requires an exploded directory 
+# in the resources directory below the Dockerfile.
+
+RUN mkdir -p /usr/src/seicentobilling-cmdline
+
+# scripts
+COPY scripts/*.sh /
+
+# jar has been created manually before thru maven or eclipse
+COPY target/seicentobilling-cmdline-${SEICENTO_VERSION}-jar-with-dependencies.jar /usr/src/seicentobilling-cmdline/seicentobilling-cmdline.jar
+
+
+RUN echo "apt-get" && \
+    echo "nameserver 8.8.8.8" | tee /etc/resolv.conf > /dev/null && \
+    apt-get -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=false update > /dev/null && apt-get install -y --no-install-recommends apt-utils unzip wget  > /dev/null && \
+    rm -rf /var/lib/apt/lists/* && \
+	echo "Check JAVA environment" && \
+    java -version && \
+    chmod +x /*.sh
+
+ENTRYPOINT ["/entrypoint-cmdline.sh"]
+
+# Default action executed by entrypoint script.
+CMD ["init"]

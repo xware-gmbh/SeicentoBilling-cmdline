@@ -1,0 +1,40 @@
+# Copyright (c) 2020. XWare GmbH - Josef Muri
+# This file is subject to the license terms contained
+# in the license file that is distributed with this file.
+
+version: '2'
+
+services:  
+  seicentobilling-cmdline:
+    image: "jmurihub/seicentobilling-cmdline:${SEICENTO_VERSION}"
+    
+    build:
+      context: .
+      dockerfile: Dockerfile-cmdline
+      args:
+        - "SEICENTO_VERSION=${SEICENTO_VERSION}"
+    
+    # point to env file with key=value entries 
+    env_file: .env
+    
+    # setting following values here will override settings from env_file
+    # environment:
+      #- DB_HOST=localhost
+      #- LOAD_SAMPLE_DATA=true
+
+      
+#  seicentobilling:
+#    image: "jmurihub/seicentobilling:${SEICNTO_VERSION}"
+      
+    # point to env file with key=value entries 
+#    env_file: config.env
+    
+    # setting following values here will override settings from env_file
+    #environment:
+      #- DB_HOST=localhost
+      #- LOAD_SAMPLE_DATA=true
+
+#    mem_limit: 3g
+#    mem_reservation: 1g
+#    cpu_shares: 256
+ 
