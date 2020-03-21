@@ -890,7 +890,7 @@ CREATE TABLE dbo.activity
     actlink character(256) COLLATE pg_catalog."default",
     actstate smallint,
     CONSTRAINT pk_activity PRIMARY KEY (actid),
-    CONSTRAINT "FK_CostAccount" FOREIGN KEY (actcusid)
+    CONSTRAINT "FK_CostAccount" FOREIGN KEY (actcsaid)
         REFERENCES dbo.costaccount (csaid) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
