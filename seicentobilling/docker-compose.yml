@@ -1,0 +1,24 @@
+# Copyright (c) 2020. XWare GmbH - Josef Muri
+# This file is subject to the license terms contained
+# in the license file that is distributed with this file.
+
+# Voraussetzung mit seicentobilling-cmdline wurde eine DB initiert.
+# Mit diesem script wird die aktueller Version von SeicentoBilling als Docker container gestartet.
+version: '2'
+
+services:
+       
+  seicentobilling:
+    image: "jmurihub/seicentobilling:${SEICNTO_VERSION}"
+      
+    # point to env file with key=value entries 
+    env_file: .env
+    
+    # setting following values here will override settings from env_file
+    #environment:
+      #- DB_HOST=localhost
+
+    mem_limit: 3g
+    mem_reservation: 1g
+    cpu_shares: 256
+ 
