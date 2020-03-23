@@ -9,7 +9,7 @@ version: '2'
 services:
        
   seicentobilling:
-    image: "jmurihub/seicentobilling:${SEICNTO_VERSION}"
+    image: "jmurihub/seicentobilling:${SEICENTO_VERSION}"
       
     # point to env file with key=value entries 
     env_file: .env
