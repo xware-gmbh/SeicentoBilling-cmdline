@@ -1,12 +1,12 @@
 # SeicentoBilling - cmdline
 
 ## Aufgabe
-Bei SecentoBilling - cmdline handelt es sich um ein Tool für das Aufsetzen einer Datenbank für [Seicento Billing](https://github.com/xware-gmbh/SeicentoBilling)
+Bei SeicentoBilling - cmdline handelt es sich um ein Tool für das Aufsetzen einer Datenbank für [Seicento Billing](https://github.com/xware-gmbh/SeicentoBilling)
 
 Folgende Datenbanken sind unterstützt und können konfiguriert werden.
 
 * Microsoft SQL Server ab Version 12
-* Postgressql ab Version 11
+* Postgressql ab Version 11 (Beta)
 
 ## Voraussetzungen
 * Installierte Docker Version (ab Version 18), mit docker-compose
@@ -18,7 +18,7 @@ Folgende Datenbanken sind unterstützt und können konfiguriert werden.
 * Anpassen .env Datei mit den gewünschten DB Settings (Typ, Host, user, passwort...)
 * Starten image mit docker-compose up
 
-Das Image wird von Docker von dockerhub bezogen und die DB wird initialisiert.
+Das Image wird von Docker von dockerhub bezogen und die DB wird initialisiert. Bereits vorhandene bzw. initialisierte DB's werden erkannt. Der Container kann also beliebig viel mal gestartet werden.
 
 ### Sample Screen
 ![docker-compose upo](./doc/img/compose-up.png)

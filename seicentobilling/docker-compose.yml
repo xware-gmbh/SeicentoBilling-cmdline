@@ -14,6 +14,9 @@ services:
     # point to env file with key=value entries 
     env_file: .env
     
+    ports:
+      - 8080:8080
+    
     # setting following values here will override settings from env_file
     #environment:
       #- DB_HOST=localhost

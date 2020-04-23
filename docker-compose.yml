@@ -34,6 +34,9 @@ services:
       #- DB_HOST=localhost
       #- LOAD_SAMPLE_DATA=true
 
+    ports:
+      - 8080:8080
+
 #    mem_limit: 3g
 #    mem_reservation: 1g
 #    cpu_shares: 256
