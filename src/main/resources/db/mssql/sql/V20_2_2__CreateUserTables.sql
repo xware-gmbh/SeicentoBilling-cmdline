@@ -1,41 +1,43 @@
-
-/****** Object:  Table [dbo].[User]  ******/
-CREATE TABLE [dbo].[AppUser](
-	[usrId] [bigint] IDENTITY(1,1) NOT NULL,
-	[username] [nvarchar](50) NULL,
-	[usrFullName] [nvarchar](50) NULL,
-	[usrThemeDesktop] [smallint] NULL,
-	[usrThemeMobile] [smallint] NULL,
-	[usrcsaId] [bigint] NULL,
-	[usrcusid] [bigint] NULL,
-	[usrLanguage] [nvarchar](10) NULL,
-	[usrTimeZone] [nvarchar](50) NULL,
-	[usrCountry] [nvarchar](10) NULL,
-	[usrValidFrom] [datetime] NULL,
-	[usrValidTo] [datetime] NULL,
-	[usrRoles] [nvarchar](128) NULL,
-	[usrState] [smallint] NULL,
-	[password] [varbinary](256) NULL,
- CONSTRAINT [PK_AppUser] PRIMARY KEY CLUSTERED 
-(
-	[usrId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
+/****** Object:  Table [dbo].[AppUser]  ******/
+if not exists (select * from sysobjects where name='AppUser' and xtype='U')
+	CREATE TABLE [dbo].[AppUser](
+		[usrId] [bigint] IDENTITY(1,1) NOT NULL,
+		[username] [nvarchar](50) NULL,
+		[usrFullName] [nvarchar](50) NULL,
+		[usrThemeDesktop] [smallint] NULL,
+		[usrThemeMobile] [smallint] NULL,
+		[usrcsaId] [bigint] NULL,
+		[usrcusid] [bigint] NULL,
+		[usrLanguage] [nvarchar](10) NULL,
+		[usrTimeZone] [nvarchar](50) NULL,
+		[usrCountry] [nvarchar](10) NULL,
+		[usrValidFrom] [datetime] NULL,
+		[usrValidTo] [datetime] NULL,
+		[usrRoles] [nvarchar](128) NULL,
+		[usrState] [smallint] NULL,
+		[password] [varbinary](256) NULL,
+	 CONSTRAINT [PK_AppUser] PRIMARY KEY CLUSTERED 
+	(
+		[usrId] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+	) ON [PRIMARY]
+	GO
+		
 GO
 
-ALTER TABLE [dbo].[AppUser]  WITH CHECK ADD  CONSTRAINT [FK_AppUser_CostAccount] FOREIGN KEY([usrcsaId])
-REFERENCES [dbo].[CostAccount] ([csaId])
+IF(OBJECT_ID('FK_AppUser_CostAccount', 'F') IS NULL)
+		ALTER TABLE [dbo].[AppUser]  WITH CHECK ADD  CONSTRAINT [FK_AppUser_CostAccount] FOREIGN KEY([usrcsaId])
+		REFERENCES [dbo].[CostAccount] ([csaId])
 GO
 
-ALTER TABLE [dbo].[AppUser] CHECK CONSTRAINT [FK_AppUser_CostAccount]
+IF(OBJECT_ID('FK_AppUser_Customer', 'F') IS NULL)
+		ALTER TABLE [dbo].[AppUser]  WITH CHECK ADD  CONSTRAINT [FK_AppUser_Customer] FOREIGN KEY([usrcusid])
+		REFERENCES [dbo].[Customer] ([cusId])
 GO
 
-ALTER TABLE [dbo].[AppUser]  WITH CHECK ADD  CONSTRAINT [FK_AppUser_Customer] FOREIGN KEY([usrcusid])
-REFERENCES [dbo].[Customer] ([cusId])
-GO
 
-create unique index IX_username on [dbo].[AppUser] (username asc)
-GO
+create unique index IX_username on [dbo].[AppUser] (username asc) with (drop_existing = on)
+
 
 /****** Add to Entity ****/            
 IF NOT EXISTS (SELECT 1 FROM [dbo].[Entity] WHERE [entname] = 'AppUser')  
