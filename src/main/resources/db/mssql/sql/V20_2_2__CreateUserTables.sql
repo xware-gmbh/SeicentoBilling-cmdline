@@ -36,7 +36,10 @@ IF(OBJECT_ID('FK_AppUser_Customer', 'F') IS NULL)
 GO
 
 
-create unique index IX_username on [dbo].[AppUser] (username asc) with (drop_existing = on)
+IF EXISTS(SELECT * FROM sys.indexes WHERE object_id = object_id('AppUser') AND NAME ='IX_username')
+    DROP INDEX indexname ON [dbo].[AppUser];
+	
+create unique index IX_username on [dbo].[AppUser] (username asc)
 
 
 /****** Add to Entity ****/            
