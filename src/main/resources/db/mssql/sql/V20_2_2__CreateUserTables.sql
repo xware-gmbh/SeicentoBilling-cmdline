@@ -37,9 +37,10 @@ GO
 
 
 IF EXISTS(SELECT * FROM sys.indexes WHERE object_id = object_id('AppUser') AND NAME ='IX_username')
-    DROP INDEX indexname ON [dbo].[AppUser];
-	
+    DROP INDEX IX_username ON [dbo].[AppUser];	
 create unique index IX_username on [dbo].[AppUser] (username asc)
+GO
+
 
 
 /****** Add to Entity ****/            
