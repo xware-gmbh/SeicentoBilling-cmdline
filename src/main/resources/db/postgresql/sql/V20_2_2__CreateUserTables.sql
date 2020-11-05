@@ -54,7 +54,7 @@ INSERT INTO dbo.AppUser
     ,usrRoles
     ,usrState
     ,password)  
-SELECT ('demo', 'Demo User' ,0, 'BillingUser', 1, (E'0x057BA03D6C44104863DC7361FE4578965D1887360F90A0895882E58A6248FC86')
+SELECT 'demo', 'Demo User' ,0, 'BillingUser', 1, (E'0x057BA03D6C44104863DC7361FE4578965D1887360F90A0895882E58A6248FC86')
     WHERE NOT EXISTS (
         SELECT 1 FROM dbo.AppUser WHERE username = 'demo'
     );
