@@ -57,7 +57,7 @@ BEGIN
 END             
 
 
-/****** Insert admin User ****/            
+/****** Insert admin User - changeme ****/            
 IF NOT EXISTS (SELECT 1 FROM [dbo].[AppUser] WHERE [username] = 'admin')  
 BEGIN 
     INSERT INTO [dbo].[AppUser]   

@@ -11,11 +11,11 @@ CREATE TABLE dbo.AppUser(
 	usrLanguage character(10) NULL,
 	usrTimeZone character(50) NULL,
 	usrCountry character(10) NULL,
-	usrValidFrom datetime NULL,
-	usrValidTo datetime NULL,
+	usrValidFrom date NULL,
+	usrValidTo date NULL,
 	usrRoles character(128) NULL,
 	usrState smallint NULL,
-	password varbinary(256) NULL,
+	password bytea NULL
 )WITH (
     OIDS = FALSE
 )
@@ -26,7 +26,7 @@ ALTER TABLE dbo.AppUser
 
 /****** Add to Entity ****/            
 INSERT INTO dbo.Entity (entName,entAbbreviation,entHasrowobject,entState)  
-    SELECT 'AppUser', 'usr' ,1,1
+    SELECT 'AppUser', 'usr' ,true,1
     WHERE NOT EXISTS (
         SELECT 1 FROM dbo.Entity WHERE entname = 'AppUser'
     );
@@ -41,7 +41,7 @@ INSERT INTO dbo.AppUser
     ,usrRoles
     ,usrState
     ,password)  
-SELECT 'admin', 'Lokaler Admin' ,0, 'BillingAdmin', 1, 0x057BA03D6C44104863DC7361FE4578965D1887360F90A0895882E58A6248FC86
+SELECT 'admin', 'Lokaler Admin' ,0, 'BillingAdmin', 1, (E'0x057BA03D6C44104863DC7361FE4578965D1887360F90A0895882E58A6248FC86')
     WHERE NOT EXISTS (
         SELECT 1 FROM dbo.AppUser WHERE username = 'admin'
     );
@@ -54,7 +54,7 @@ INSERT INTO dbo.AppUser
     ,usrRoles
     ,usrState
     ,password)  
-SELECT ('demo', 'Demo User' ,0, 'BillingUser', 1, 0x057BA03D6C44104863DC7361FE4578965D1887360F90A0895882E58A6248FC86)
+SELECT ('demo', 'Demo User' ,0, 'BillingUser', 1, (E'0x057BA03D6C44104863DC7361FE4578965D1887360F90A0895882E58A6248FC86')
     WHERE NOT EXISTS (
         SELECT 1 FROM dbo.AppUser WHERE username = 'demo'
     );
