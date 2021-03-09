@@ -10,5 +10,6 @@ BEGIN
 	itmPriceLevel [smallint] NOT NULL DEFAULT 0;
 
 END
+GO
 
 update [dbo].[Item] set itmPriceLevel = 1 where itmitgid = 2;
