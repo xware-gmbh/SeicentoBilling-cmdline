@@ -23,4 +23,9 @@ Das Image wird von Docker von dockerhub bezogen und die DB wird initialisiert. B
 ### Sample Screen
 ![docker-compose upo](./doc/img/compose-up.png)
 
+## Release
+Bevor in Azure die Pipeline für den Release gestartet wird, sind folgende Dateien mit der Version anzupassen:
+* pom.xml
+* Dockerfile-cmdline
+* .env
  
