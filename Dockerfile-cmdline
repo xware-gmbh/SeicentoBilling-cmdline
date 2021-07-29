@@ -12,7 +12,7 @@ FROM ${JAVA_BASE_IMAGE}
 
 ARG SEICENTO_VERSION
 
-ENV SEICENTO_VERSION ${SEICENTO_VERSION:-21.1.0}
+ENV SEICENTO_VERSION ${SEICENTO_VERSION:-21.2.0}
 
 # This Dockerfile requires an exploded directory 
 # in the resources directory below the Dockerfile.
